@@ -96,7 +96,7 @@ export function TextSelectionDemo() {
 
   return (
     <div className="tsd-container">
-      <style>{`
+      <style suppressHydrationWarning>{`
         .tsd-container {
           position: relative;
           width: 100%;

@@ -25,7 +25,7 @@ export default function SchemaPage() {
                 top: '-0.1em',
               }}
             >
-              v1.0
+              AFS 1.1
             </span>
           </h1>
           <p className="tagline">구조화된 UI 피드백을 위한 이식 가능한 포맷</p>
@@ -172,6 +172,23 @@ export default function SchemaPage() {
   // 피드백 분류
   intent: "fix" | "change" | "question" | "approve";
   severity: "blocking" | "important" | "suggestion";
+
+  // 레이아웃 모드 (AFS 1.1)
+  kind: "feedback" | "placement" | "rearrange";  // 기본값: "feedback"
+  placement: {             // kind === "placement"일 때
+    componentType: string; // 컴포넌트 유형 ("Hero", "Button", "Card" 등)
+    width: number;         // 뷰포트 너비의 %
+    height: number;        // 픽셀 단위 높이
+    scrollY: number;       // 문서 상단에서 px
+    text?: string;         // 배치 목적 설명 (선택)
+  };
+  rearrange: {             // kind === "rearrange"일 때
+    selector: string;      // CSS 선택자
+    label: string;         // 표시 레이블
+    tagName: string;       // HTML 태그 이름
+    originalRect: { top: number; left: number; width: number; height: number; };
+    currentRect:  { top: number; left: number; width: number; height: number; };
+  };
 }`}
           />
 
@@ -250,6 +267,23 @@ export default function SchemaPage() {
   intent?: "fix" | "change" | "question" | "approve";
   severity?: "blocking" | "important" | "suggestion";
 
+  // 레이아웃 모드 (AFS 1.1)
+  kind?: "feedback" | "placement" | "rearrange";
+  placement?: {
+    componentType: string;
+    width: number;
+    height: number;
+    scrollY: number;
+    text?: string;
+  };
+  rearrange?: {
+    selector: string;
+    label: string;
+    tagName: string;
+    originalRect: { top: number; left: number; width: number; height: number };
+    currentRect:  { top: number; left: number; width: number; height: number };
+  };
+
   // 라이프사이클
   status?: "pending" | "acknowledged" | "resolved" | "dismissed";
   resolvedAt?: string;
@@ -303,7 +337,7 @@ type ThreadMessage = {
             copyable
             code={`{
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://agentation.dev/schema/annotation.v1.json",
+  "$id": "https://agentation.dev/schema/annotation.v1.1.json",
   "title": "Annotation",
   "type": "object",
   "required": ["id", "comment", "elementPath", "timestamp", "x", "y", "element"],
@@ -333,7 +367,30 @@ type ThreadMessage = {
     "nearbyElements": { "type": "string" },
     "intent": { "enum": ["fix", "change", "question", "approve"] },
     "severity": { "enum": ["blocking", "important", "suggestion"] },
-    "status": { "enum": ["pending", "acknowledged", "resolved", "dismissed"] }
+    "status": { "enum": ["pending", "acknowledged", "resolved", "dismissed"] },
+    "kind": { "enum": ["feedback", "placement", "rearrange"] },
+    "placement": {
+      "type": "object",
+      "properties": {
+        "componentType": { "type": "string" },
+        "width": { "type": "number" },
+        "height": { "type": "number" },
+        "scrollY": { "type": "number" },
+        "text": { "type": "string" }
+      },
+      "required": ["componentType", "width", "height", "scrollY"]
+    },
+    "rearrange": {
+      "type": "object",
+      "properties": {
+        "selector": { "type": "string" },
+        "label": { "type": "string" },
+        "tagName": { "type": "string" },
+        "originalRect": { "type": "object" },
+        "currentRect": { "type": "object" }
+      },
+      "required": ["selector", "label", "tagName", "originalRect", "currentRect"]
+    }
   }
 }`}
           />
@@ -359,6 +416,34 @@ type ThreadMessage = {
   "intent": "fix",
   "severity": "blocking",
   "status": "pending"
+}`}
+          />
+        </section>
+
+        <section>
+          <h2 id="layout-mode-example">레이아웃 모드 예시 (AFS 1.1)</h2>
+          <p>
+            <code>kind: &quot;placement&quot;</code>인 어노테이션 — 에이전트에게
+            새 컴포넌트를 어디에 배치할지 알려줍니다:
+          </p>
+          <CodeBlock
+            language="json"
+            code={`{
+  "id": "ann_p9r3k",
+  "kind": "placement",
+  "comment": "Hero 컴포넌트를 여기에 배치",
+  "elementPath": "body",
+  "timestamp": 1742774400000,
+  "x": 50,
+  "y": 120,
+  "element": "body",
+  "placement": {
+    "componentType": "Hero",
+    "width": 85.4,
+    "height": 480,
+    "scrollY": 0,
+    "text": "가격표와 CTA 버튼이 있는 메인 히어로 섹션"
+  }
 }`}
           />
         </section>
@@ -502,7 +587,7 @@ type ThreadMessage = {
             <span
               style={{ color: '#4a9eff', fontFamily: "'SF Mono', monospace" }}
             >
-              v1
+              v1.1
             </span>
           </p>
           <p
@@ -513,7 +598,7 @@ type ThreadMessage = {
             }}
           >
             스키마 URL:{' '}
-            <code>https://agentation.dev/schema/annotation.v1.json</code>
+            <code>https://agentation.dev/schema/annotation.v1.1.json</code>
           </p>
         </section>
       </article>
