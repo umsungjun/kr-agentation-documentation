@@ -269,6 +269,47 @@ export default function FeaturesPage() {
         </section>
 
         <section>
+          <h2 id="layout-mode">레이아웃 모드</h2>
+          <p>
+            <code>L</code> 키를 눌러 레이아웃 모드로 진입하세요. 65개 이상의
+            유형을 드래그할 수 있는 컴포넌트 팔레트가 표시됩니다. 기존 섹션을
+            잡아서 재배치할 수도 있습니다. 변경사항은 MCP를 통해 연결된
+            에이전트에 실시간으로 동기화됩니다.
+          </p>
+          <ul>
+            <li>
+              <strong>컴포넌트 배치</strong> &mdash; 팔레트에서 드래그하여 새
+              요소 추가
+            </li>
+            <li>
+              <strong>섹션 재배치</strong> &mdash; 기존 요소를 잡아 원하는
+              위치로 드래그
+            </li>
+            <li>
+              <strong>새 페이지 와이어프레임</strong> &mdash; 와이어프레임
+              모드를 토글하면 현재 페이지가 페이드 아웃되며, 불투명도 슬라이더와
+              컨텍스트용 목적 필드로 새 레이아웃을 스케치할 수 있습니다
+            </li>
+            <li>
+              <strong>에이전트 동기화</strong> &mdash; 변경사항이{' '}
+              <code>kind: &quot;placement&quot;</code> 또는{' '}
+              <code>kind: &quot;rearrange&quot;</code> 어노테이션으로 표시됩니다
+            </li>
+          </ul>
+          <p
+            style={{
+              fontSize: '0.8125rem',
+              color: 'rgba(0,0,0,0.55)',
+              marginTop: '0.5rem',
+            }}
+          >
+            배치는 픽셀 단위 정밀 명세가 아닌 공간적 힌트입니다. 에이전트는
+            컴포넌트 유형, 대략적인 위치, 뷰포트 대비 크기를 받아 실제 CSS로
+            변환합니다. 결과는 에이전트와 코드베이스에 따라 다를 수 있습니다.
+          </p>
+        </section>
+
+        <section>
           <h2 id="keyboard-shortcuts">키보드 단축키</h2>
           <table
             style={{
@@ -376,6 +417,26 @@ export default function FeaturesPage() {
                   }}
                 >
                   피드백 복사
+                </td>
+              </tr>
+              <tr>
+                <td
+                  style={{
+                    padding: '0.5rem 0',
+                    borderBottom: '1px solid rgba(0,0,0,0.06)',
+                  }}
+                >
+                  <code>L</code>
+                </td>
+                <td
+                  style={{
+                    padding: '0.5rem 0',
+                    borderBottom: '1px solid rgba(0,0,0,0.06)',
+                    color: 'rgba(0,0,0,0.5)',
+                    textAlign: 'right',
+                  }}
+                >
+                  레이아웃 모드 전환
                 </td>
               </tr>
               <tr>

@@ -13,7 +13,7 @@ interface Change {
 interface Release {
   version: string;
   date: string;
-  summary?: string;
+  summary?: ReactNode;
   changes?: Change[];
 }
 
@@ -29,6 +29,196 @@ function isMajorVersion(version: string): boolean {
 }
 
 const releases: Release[] = [
+  {
+    version: '3.0.2',
+    date: '2026년 3월 24일',
+    changes: [
+      {
+        type: 'fixed',
+        text: '툴바가 페이지 애니메이션을 일시정지할 때 레이아웃 모드 애니메이션이 멈추는 문제 수정',
+      },
+      {
+        type: 'fixed',
+        text: '어노테이션 텍스트 영역, 설정 패널, 색상 견본이 컨테이너를 벗어나는 오버플로우 문제 수정',
+      },
+    ],
+  },
+  {
+    version: '3.0.1',
+    date: '2026년 3월 24일',
+    changes: [
+      {
+        type: 'fixed',
+        text: 'npm 및 설정 패널의 로고 표시 오류 수정',
+      },
+    ],
+  },
+  {
+    version: '3.0.0',
+    date: '2026년 3월 24일',
+    summary: (
+      <>
+        에이전트에게 배치 위치를 직접 보여주세요.{' '}
+        <a href="/blog/layout-mode" className="styled-link">
+          레이아웃 모드
+        </a>
+        를 통해 컴포넌트를 배치하고, 섹션을 재배치하며, 새 페이지를
+        와이어프레임으로 작성할 수 있습니다. 에이전트는 긴 설명 대신 좌표와 크기
+        정보를 받습니다.
+      </>
+    ),
+    changes: [
+      {
+        type: 'added',
+        text: (
+          <>
+            레이아웃 모드 — <code>L</code> 키를 눌러 컴포넌트를 페이지에
+            드래그하거나, 기존 섹션을 재배치하거나, 빈 화면에서 와이어프레임
+            작업 가능
+          </>
+        ),
+      },
+      {
+        type: 'added',
+        text: '5개 카테고리에 걸쳐 65개 이상의 드래그 가능한 유형을 포함한 컴포넌트 팔레트',
+      },
+      {
+        type: 'added',
+        text: '스냅 가이드, 이동 배지, CSS 선택자 레이블을 지원하는 섹션 감지 및 재배치 기능',
+      },
+      {
+        type: 'added',
+        text: '현재 페이지 불투명도 조절과 컨텍스트를 위한 목적 필드를 포함한 새 페이지 와이어프레임 모드',
+      },
+      {
+        type: 'added',
+        text: (
+          <>
+            <a href="/schema" className="styled-link">
+              AFS 1.1
+            </a>{' '}
+            — 에이전트가 피드백, 배치, 재배치 지시를 구분할 수 있도록
+            어노테이션에 <code>kind</code> 필드 추가
+          </>
+        ),
+      },
+      {
+        type: 'improved',
+        text: '커서 스타일이 툴바 루트 내에 격리되어 호스트 페이지에 영향을 주지 않도록 개선',
+      },
+    ],
+  },
+  {
+    version: '2.3.3',
+    date: '2026년 3월 14일',
+    changes: [
+      {
+        type: 'improved',
+        text: '마커 색상이 와이드 색역 화면에서 Display P3를 사용하고, sRGB로 폴백하도록 개선',
+      },
+      {
+        type: 'fixed',
+        text: (
+          <>
+            <code>className</code> prop이 <code>!important</code> 없이 툴바
+            위치를 덮어쓸 수 있도록 수정
+          </>
+        ),
+      },
+    ],
+  },
+  {
+    version: '2.3.2',
+    date: '2026년 3월 9일',
+    changes: [
+      {
+        type: 'fixed',
+        text: '범위 없는 fill 보호 규칙(예: Tailwind의 fill-current)으로 인해 호스트 페이지 SVG 아이콘이 깨지는 문제 수정',
+      },
+      {
+        type: 'fixed',
+        text: '호스트 CSS가 인라인 opacity를 덮어쓸 때 툴바 아이콘 상태가 동시에 렌더링되는 문제 수정',
+      },
+      {
+        type: 'fixed',
+        text: '모달 및 드로어(Radix, shadcn, vaul) 내부의 입력 요소에 어노테이션할 때 텍스트 영역 포커스가 사라지는 문제 수정',
+      },
+      {
+        type: 'fixed',
+        text: 'Next.js App Router 내부(SegmentViewNode)가 실제 React 컴포넌트 이름 대신 표시되는 문제 수정',
+      },
+    ],
+  },
+  {
+    version: '2.3.1',
+    date: '2026년 3월 9일',
+    changes: [
+      {
+        type: 'fixed',
+        text: '어노테이션 텍스트 영역 및 설정 입력란에 타이핑할 때 호스트 앱의 키보드 단축키가 실행되는 문제 수정',
+      },
+    ],
+  },
+  {
+    version: '2.3.0',
+    date: '2026년 3월 7일',
+    changes: [
+      {
+        type: 'added',
+        text: (
+          <>
+            소스 파일 감지 — 어노테이션에 소스 파일 경로와 줄 번호(예:{' '}
+            <code>src/components/Button.tsx:42</code>) 포함, Next.js, Vite,
+            Webpack, Turbopack 지원
+          </>
+        ),
+      },
+      {
+        type: 'added',
+        text: (
+          <>
+            툴바 위치 커스터마이징을 위한 <code>className</code> prop 추가
+          </>
+        ),
+      },
+      {
+        type: 'added',
+        text: '탭 단위로 툴바를 숨기는 "재시작 시까지 숨기기" 설정 추가',
+      },
+      {
+        type: 'improved',
+        text: '툴바 CSS가 호스트 페이지 스타일로부터 완전히 격리되도록 개선',
+      },
+      {
+        type: 'improved',
+        text: '툴바 버튼 사이를 이동할 때 툴팁이 즉시 표시되도록 개선',
+      },
+      {
+        type: 'improved',
+        text: (
+          <>
+            더 나은 트리 쉐이킹을 위한 <code>sideEffects: false</code> 추가
+          </>
+        ),
+      },
+      {
+        type: 'fixed',
+        text: '비표준 환경에서 개발 모드 감지 오류 수정',
+      },
+      {
+        type: 'fixed',
+        text: '전송 버튼 포인터 이벤트가 등록되지 않는 문제 수정',
+      },
+      {
+        type: 'fixed',
+        text: '툴바 포털 이벤트가 호스트 앱의 클릭 외부 핸들러를 트리거하는 문제 수정',
+      },
+      {
+        type: 'fixed',
+        text: '동기화 이후 해결 및 닫힌 어노테이션이 다시 나타나는 문제 수정',
+      },
+    ],
+  },
   {
     version: '2.2.1',
     date: '2026년 2월 11일',

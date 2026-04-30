@@ -13,6 +13,14 @@ interface BlogPost {
 
 const posts: BlogPost[] = [
   {
+    slug: 'layout-mode',
+    title: '레이아웃 모드 소개',
+    description:
+      '에이전트에게 배치를 보여주세요. 레이아웃을 텍스트로 설명하는 대신 컴포넌트를 드래그하고, 섹션을 재배치하고, 페이지를 와이어프레임으로 작성하세요.',
+    date: '2026년 3월 24일',
+    image: '/blog/layout-mode.png',
+  },
+  {
     slug: 'introducing-agentation-2',
     title: 'Agentation 2.0 소개',
     description:
